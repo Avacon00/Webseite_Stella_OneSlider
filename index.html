@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stella – Deine diskrete Oase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom color classes */
+        .text-gold { color: #d4af37; }
+        .bg-gold { background-color: #d4af37; }
+        .border-gold { border-color: #d4af37; }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1200x800/333333/999999?text=Stimmungsvolle+Au%C3%9Fenansicht+des+Wohnwagens+bei+Nacht');
+            background-size: cover;
+            background-position: center;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #d4af37; /* Gold */
+        }
+        .btn-primary {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: #b89a30;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .card {
+            background-color: #2c2c2c;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            display: flex; 
+            flex-direction: column;
+            height: 100%;
+        }
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        /* Styles for FAQ */
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+        /* Styles for the modal */
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-40 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-wider">Stella</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="nav-link text-base">Über Mich</a>
+                <a href="#services" class="nav-link text-base">Service</a>
+                <a href="#guestbook" class="nav-link text-base">Gästebuch</a>
+                <a href="#faq" class="nav-link text-base">FAQ</a>
+                <a href="#gallery" class="nav-link text-base">Mein Reich</a>
+                <a href="#contact" class="nav-link text-base">Kontakt</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center pt-16">
+        <div class="bg-black/50 p-8 rounded-lg">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Willkommen in meiner Oase</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">Erlebe eine unvergessliche Zeit in privater und diskreter Atmosphäre.</p>
+            <button id="openModalBtnHero" class="btn-primary">Termin anfragen</button>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-16 space-y-24">
+        <!-- About Me Section -->
+        <section id="about">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/3">
+                    <img src="https://placehold.co/400x500/555555/cccccc?text=Stilvolles+Portrait+von+Stella" alt="Bild von Stella" class="rounded-lg shadow-2xl object-cover w-full h-full">
+                </div>
+                <div class="w-full md:w-2/3">
+                    <h2 class="text-4xl font-bold mb-6 text-gold">Über Mich</h2>
+                    <p class="text-lg text-gray-300 mb-4">
+                        Hallo, ich bin Stella. Mit meiner offenen und herzlichen Art schaffe ich eine vertrauensvolle Atmosphäre, in der Du Dich fallen lassen und den Moment genießen kannst. Diskretion und Respekt stehen für mich an erster Stelle.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-4">
+                        In meinem gemütlichen und stilvoll eingerichteten Wohnwagen entfliehen wir gemeinsam dem Alltag. Ich lege großen Wert auf Sauberkeit und Hygiene, damit Dein Aufenthalt nicht nur aufregend, sondern auch rundum sicher und angenehm ist.
+                    </p>
+                    <p class="text-lg text-gray-300">
+                        Ich freue mich darauf, Dich kennenzulernen und Dir eine wundervolle Zeit zu bereiten.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Availability Status Section -->
+        <section id="availability">
+             <div class="bg-[#2c2c2c] rounded-lg p-6 flex items-center justify-center gap-4 shadow-lg">
+                <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                <p class="text-xl font-semibold text-white">Ich bin aktuell erreichbar und habe heute noch Termine frei!</p>
+             </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gold">Mein Service für Dich</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="card text-center">
+                    <div class="card-content">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Sinnliche Auszeit</h3>
+                            <p class="text-gray-400 mb-4">Eine entspannte halbe Stunde, um dem Stress zu entfliehen und neue Energie zu tanken.</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-gold my-4">XX €</div>
+                            <p class="text-gray-500">30 Minuten</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 (Recommended) -->
+                <div class="card text-center border-2 border-gold">
+                    <div class="card-content">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Intensive Begegnung</h3>
+                            <p class="text-gray-400 mb-4">Eine volle Stunde voller Leidenschaft und Hingabe. Zeit, um Wünsche wahr werden zu lassen.</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-gold my-4">XXX €</div>
+                            <p class="text-gray-500">60 Minuten</p>
+                            <p class="text-gold font-bold mt-4 text-lg">Empfohlen</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="card text-center">
+                    <div class="card-content">
+                        <div>
+                           <h3 class="text-2xl font-bold mb-4">Exklusive Reise</h3>
+                            <p class="text-gray-400 mb-4">Zwei Stunden für ein besonders ausgiebiges und unvergessliches Erlebnis ohne Zeitdruck.</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-gold my-4">XXX €</div>
+                            <p class="text-gray-500">120 Minuten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <p class="text-center mt-8 text-gray-400">Weitere Wünsche gerne auf Anfrage. Nur Barzahlung.</p>
+        </section>
+
+        <!-- Guestbook Section -->
+        <section id="guestbook">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gold">Was meine Gäste sagen</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-[#2c2c2c] p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic">"Eine unvergessliche Erfahrung. Stella ist eine wundervolle Gastgeberin, bei der man sich sofort wohlfühlt. Absolute Empfehlung!"</p>
+                    <p class="text-right mt-4 font-bold text-gold">- Michael, 45</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-[#2c2c2c] p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic">"Diskretion, Sauberkeit und eine charmante Art, die ihresgleichen sucht. Der Wohnwagen ist eine wahre Oase. Ich komme wieder."</p>
+                    <p class="text-right mt-4 font-bold text-gold">- Thomas, 38</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-[#2c2c2c] p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic">"Ich war anfangs nervös, aber Stellas offene Art hat das Eis sofort gebrochen. Es war eine perfekte Auszeit vom Alltag."</p>
+                    <p class="text-right mt-4 font-bold text-gold">- Alex, 29</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gold">Häufig gestellte Fragen</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-[#2c2c2c] rounded-lg">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-white">Gibt es diskrete Parkmöglichkeiten?</h3>
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-400">
+                        <p>Ja, absolut. Der Standort ist so gewählt, dass Du ungestört und diskret parken kannst, ohne dass es zu neugierigen Blicken kommt. Der genaue Standort wird bei der Terminbestätigung mitgeteilt.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="bg-[#2c2c2c] rounded-lg">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-white">Welche Zahlungsmethoden werden akzeptiert?</h3>
+                         <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-400">
+                        <p>Ich akzeptiere ausschließlich Barzahlung. Bitte bring den Betrag passend zum Termin mit. Eine Kartenzahlung oder Überweisung ist leider nicht möglich.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="bg-[#2c2c2c] rounded-lg">
+                    <div class="faq-question cursor-pointer p-6 flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-white">Muss ich etwas mitbringen?</h3>
+                         <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer hidden p-6 pt-0 text-gray-400">
+                        <p>Du musst nichts weiter mitbringen als Dich selbst und gute Laune. Handtücher und alles Notwendige für die Hygiene sind vorhanden. Das Wichtigste ist, dass Du Dich wohlfühlst und entspannen kannst.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section id="gallery">
+             <h2 class="text-4xl font-bold text-center mb-12 text-gold">Mein Reich</h2>
+            <p class="text-lg text-center max-w-3xl mx-auto mb-12 text-gray-300">
+                Mein Wohnwagen ist ein diskreter und luxuriöser Rückzugsort. Er ist modern ausgestattet, absolut sauber und bietet eine gemütliche und private Atmosphäre.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <img src="https://placehold.co/600x400/2c2c2c/eeeeee?text=Gem%C3%BCtliche+Sitzecke" alt="Innenansicht des Wohnwagens: Sitzecke" class="rounded-lg shadow-lg w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="https://placehold.co/600x400/2c2c2c/eeeeee?text=Einladender+Schlafbereich" alt="Innenansicht des Wohnwagens: Bett" class="rounded-lg shadow-lg w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity lg:col-span-2">
+                <img src="https://placehold.co/600x400/2c2c2c/eeeeee?text=Stilvolle+Details" alt="Innenansicht des Wohnwagens: Dekoration" class="rounded-lg shadow-lg w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity lg:col-span-2">
+                <img src="https://placehold.co/600x400/2c2c2c/eeeeee?text=Modernes+Badezimmer" alt="Innenansicht des Wohnwagens: Bad" class="rounded-lg shadow-lg w-full h-full object-cover cursor-pointer hover:opacity-80 transition-opacity">
+            </div>
+        </section>
+
+        <!-- Contact & Rules Section -->
+        <section id="contact">
+            <div class="card">
+                <div class="card-content flex-col md:flex-row gap-8 !p-8 md:!p-12">
+                    <div class="w-full md:w-1/2">
+                        <h2 class="text-4xl font-bold mb-6 text-gold">Kontakt & Termin</h2>
+                        <p class="text-lg text-gray-300 mb-6">
+                            Für einen Termin nutze bitte das Kontaktformular oder kontaktiere mich direkt per WhatsApp oder Anruf. Anfragen per SMS werden nicht beantwortet.
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                <span class="text-lg text-white font-mono tracking-widest">+49 123 4567890</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" /><circle cx="12" cy="10" r="3" /></svg>
+                                <span class="text-lg text-white">Standort: Region Hannover (genauer Ort bei Terminvereinbarung)</span>
+                            </div>
+                        </div>
+                        <button id="openModalBtnContact" class="btn-primary">Termin anfragen</button>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="text-2xl font-bold mb-4 text-gold">Wichtige Hinweise</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                           <li><strong>100% Diskretion:</strong> Was bei mir passiert, bleibt bei mir. Das erwarte ich auch von Dir.</li>
+                            <li><strong>Hygiene:</strong> Ich lege höchsten Wert auf Sauberkeit. Eine Duschmöglichkeit ist vorhanden. Bitte erscheine gepflegt.</li>
+                            <li><strong>Keine Eile:</strong> Mein Zuhause ist eine stressfreie Zone. Genieße Deine Zeit.</li>
+                            <li><strong>Respekt:</strong> Ein respektvoller und höflicher Umgang ist die Basis für unser Treffen.</li>
+                            <li><strong>Sicherheit:</strong> Ich behalte mir das Recht vor, Anfragen ohne Angabe von Gründen abzulehnen.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-center p-6 mt-16">
+        <p class="text-gray-500">&copy; 2025 Stella. Alle Rechte vorbehalten.</p>
+        <p class="text-gray-600 text-sm mt-2">Diese Dienstleistung richtet sich ausschließlich an volljährige Personen.</p>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- Backdrop -->
+        <div id="modalBackdrop" class="fixed inset-0 bg-black/70 modal-backdrop opacity-0"></div>
+        
+        <!-- Modal Content -->
+        <div id="modalContent" class="modal-content bg-[#2c2c2c] rounded-lg shadow-2xl w-full max-w-md p-8 relative opacity-0 transform scale-95">
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <div id="formContainer">
+                <h2 class="text-3xl font-bold text-center mb-6 text-gold">Terminanfrage</h2>
+                <form id="contactForm">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-300 mb-2">Name (Optional)</label>
+                        <input type="text" id="name" class="w-full bg-[#1a1a1a] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="wunschtermin" class="block text-gray-300 mb-2">Wunschtermin & Uhrzeit</label>
+                        <input type="text" id="wunschtermin" placeholder="z.B. Morgen Nachmittag, 25.12. um 18 Uhr" required class="w-full bg-[#1a1a1a] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-300 mb-2">Nachricht & Wünsche (Optional)</label>
+                        <textarea id="message" rows="4" class="w-full bg-[#1a1a1a] border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">Anfrage senden</button>
+                </form>
+            </div>
+
+            <div id="successMessage" class="hidden text-center">
+                 <h2 class="text-3xl font-bold text-center mb-6 text-gold">Danke!</h2>
+                 <p class="text-lg text-gray-300">Deine Anfrage wurde versendet. Ich melde mich in Kürze bei Dir, um den Termin zu bestätigen.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- FAQ Accordion Logic ---
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('svg');
+
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // --- Modal Logic ---
+        const contactModal = document.getElementById('contactModal');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalContent = document.getElementById('modalContent');
+        const openModalBtnHero = document.getElementById('openModalBtnHero');
+        const openModalBtnContact = document.getElementById('openModalBtnContact');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const contactForm = document.getElementById('contactForm');
+        const formContainer = document.getElementById('formContainer');
+        const successMessage = document.getElementById('successMessage');
+
+        const openModal = () => {
+            contactModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalBackdrop.classList.remove('opacity-0');
+                modalContent.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        };
+
+        const closeModal = () => {
+            modalBackdrop.classList.add('opacity-0');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                contactModal.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+                contactForm.reset();
+            }, 300);
+        };
+
+        openModalBtnHero.addEventListener('click', openModal);
+        openModalBtnContact.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Form submitted (simulation).');
+            formContainer.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            setTimeout(closeModal, 4000);
+        });
+    </script>
+</body>
+</html>
